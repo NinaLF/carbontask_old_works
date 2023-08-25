@@ -89,6 +89,8 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     rating0 = models.IntegerField(choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10], widget=widgets.RadioSelectHorizontal,
                                   label='On a scale from 1 to 10, how carbon intensive do you think these behaviors are in total ?')
+    vignetteNumber = models.IntegerField(initial= 0)
+    order_behavior_types = models.StringField()
    
 
 # FUNCTIONS
@@ -112,6 +114,7 @@ class task_page00(Page):
     def vars_for_template(player: Player):
         # this determines which vignette
         task_in_round = player.participant.task_rounds[player.round_number - 1]
+        player.vignetteNumber = task_in_round
         my_vignette = C.FOOTPRINT_COMBINATIONS[task_in_round]
         my_vignette_table = C.FOOTPRINT_COMBINATIONS_TABLE[task_in_round]
         # this determines which order within vignette
@@ -119,9 +122,13 @@ class task_page00(Page):
         random.shuffle(random_behavior_order)
         current_footprint_shuffled = []
         current_footprint_table_shuffled = []
+        behavior_types = ["Diet", "Heating", "Recycling", "Food", "Commute", "Vacation"]
+        order_behavior_types = []
         for i in random_behavior_order:
             current_footprint_shuffled.append(my_vignette[i])
             current_footprint_table_shuffled.append(my_vignette_table[i])
+            order_behavior_types.append(behavior_types[i])
+        player.order_behavior_types = str(order_behavior_types)
         return {
             "current_footprint" : current_footprint_shuffled,
             "current_footprint_table": current_footprint_table_shuffled,
