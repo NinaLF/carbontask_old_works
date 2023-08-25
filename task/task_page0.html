@@ -1,0 +1,50 @@
+{{ block title }}task{{ endblock }}
+{{ block content }}
+
+<style>
+    /* Adjust spacing between sentences */
+.sentence {
+    margin: 0;  /* Adjust this value to control spacing between sentences */
+    padding: 0; /* Optionally adjust padding if needed */
+    line-height: 0.5;
+    }
+
+.table , tr, th {
+  width: 170%;
+  border: 1px solid;
+  font-weight: normal;
+  padding: 1.2; /* Optionally adjust padding if needed */
+  line-height: 2;
+}   
+</style>
+
+
+<p>
+    How carbon intensive do you think this is footprint is?
+</p>
+ 
+<div class="sentence">
+
+{{ for item in current_combination }}
+     <p>{{ item|safe }}  </p>
+{{ endfor }}
+<br>
+<br>
+
+</div>
+
+<div class="table"></div>
+<table>
+     {{ for item in Footprint_try1 }}
+        {{ item|safe }}  
+     {{ endfor }}
+
+</table>
+</div>
+
+{{ formfields }}
+
+{{ next_button }}
+ 
+ 
+{{ endblock}}

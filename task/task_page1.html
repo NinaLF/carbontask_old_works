@@ -1,0 +1,33 @@
+{{ block title }}task{{ endblock }}
+{{ block content }}
+
+<style>
+    /* Adjust spacing between sentences */
+.sentence {
+    margin: 0;  /* Adjust this value to control spacing between sentences */
+    padding: 0; /* Optionally adjust padding if needed */
+    line-height: 0.5;
+    }
+</style>
+
+
+<p>
+    How carbon intensive do you think this is footprint is?
+</p>
+ 
+<div class="sentence">
+
+{{ for item in current_combination }}
+     <p>{{ item|safe }}  </p>
+{{ endfor }}
+
+
+</div>
+
+
+{{ formfields }}
+
+{{ next_button }}
+ 
+ 
+{{ endblock}}

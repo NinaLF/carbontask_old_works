@@ -1,0 +1,18 @@
+{{ block title }}questionnaire{{ endblock }}
+{{ block content }}
+
+
+{{ include_sibling 'variables_text.html' }}
+
+<p>
+    Please indicate how much you xxxxxxx
+
+</p>
+
+<table class="table">
+    {{ formfields }}
+</table>
+
+
+{{ next_button }}
+{{ endblock }}
